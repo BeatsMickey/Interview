@@ -1,0 +1,178 @@
+1. Что выведет console.log(typeof NaN); ?
+    number
+
+2. Что выведет console.log(NaN === NaN); ?
+    false
+
+3. 0.1 + 0.2 == 0.3 ?
+    false
+
+4. Какой тип будет иметь переменная a, если она создается при помощи следующего кода: var a = "a,b".split(',');
+    array
+
+5. Сделать так, чтобы при нажатии на элемент <а> алертом выводилось «Hello world!».
+    // Навешу на все <a> на странице
+    let a = document.querySelectorAll('a');
+    for(let i = 0; i < a.length; i++) {
+        a[i].addEventListener('click', (event) => {
+            event.preventDefault();
+            alert('Hello world!')
+            });
+    };
+
+6. Найти все элементы div с классом one, а также все элементы p с классом two. Затем добавить им всем класс three и визуально плавно спустить вниз.
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+            body {
+                position: absolute;
+            }
+            .one, .two {
+                position: relative;
+                top: 0;
+                transition: top 10s;
+            }
+            .three {
+                top: 500px;
+            }
+        </style>
+        <script>
+            setTimeout(()=>{
+                let array = [...document.querySelectorAll('div.one'), ...document.querySelectorAll('p.two')];
+                console.log(array);
+                for(let i = 0; i < array.length; i++) {
+                    array[i].classList.add('three');
+                }
+            }, 0)();
+        </script>
+    </head>
+    <body>
+        <div class = 'one'>div one</div>
+        <div class = 'one'>div one</div>
+        <div class = 'one'>div one</div>
+
+        <p class = 'one'>one</p>
+        <p class = 'one'>one</p>
+        <p class = 'one'>one</p>
+
+        <p class = 'two'>two</p>
+        <p class = 'two'>two</p>
+        <p class = 'two'>two</p>
+
+        <div class = 'two'>div two</div>
+        <div class = 'two'>div two</div>
+        <div class = 'two'>div two</div>
+    </body>
+    </html>
+
+7. Выбрать видимый div с именем red, который содержит тег span.
+
+    let array = document.getElementsByTagName('div');
+    let div;
+    for(let i = 0; i < array.length; i++) {
+        if(array[i].classList.contains("red")) {
+            if(array[i].style.display == 'none') {
+                if(array[i].querySelectorAll('span').length !== 0) {
+                    div = array[i]
+                }
+            }
+        }
+    };
+    console.log(div);
+
+8. Привести пример замыкания.
+
+    function fn () {
+        let a = 0;
+        return function () {
+         a++;
+         console.log(a)
+        }
+    }
+
+    let b = fn();
+    b(); // 1
+    b(); // 2
+    b(); // 3
+
+9. Написать функцию, которая уменьшает или увеличивает указанное время на заданное количество минут, например:
+    changeTime('10:00', 1)) //return '10:01'
+    changeTime('10:00', -1) //return '09:59'
+    changeTime('23:59', 1) //return '00:00'
+    changeTime('00:00', -1) //return '23:59'
+
+    function changeTime (time, min) {
+            let arr = time.split(':');
+            let int = (+arr[0] * 60) + (+arr[1]) + min;
+            if (int < 0) {
+             return console.log('error');
+            }
+            let hours = Math.floor(int / 60);
+            let minutes = int - hours  * 60;
+            minutes = minutes < 10 ? `0${minutes}`: `${minutes}`;
+            hours = hours < 10 ? `0${hours}`: `${hours}`
+            return `${hours}:${minutes}`;
+        }
+
+
+
+10. Написать функцию, возвращающую градус, на который указывают часовая и минутная стрелки в зависимости от времени, например:
+    clock_degree("00:00") returns : "360:360"
+    clock_degree("01:01") returns : "30:6"
+    clock_degree("00:01") returns : "360:6"
+    clock_degree("01:00") returns : "30:360"
+    clock_degree("01:30") returns : "30:180"
+    clock_degree("24:00") returns : "Check your time !"
+    clock_degree("13:60") returns : "Check your time !"
+    clock_degree("20:34") returns : "240:204"
+
+    function clock_degree (time) {
+            let arr = time.split(':');
+            let hours = +arr[0];
+            let minutes = +arr[1];
+            let degHour;
+            let degMin;
+            if (hours === 0) {
+                degHour = 360;
+            } else if (hours > 12 && hours < 24){
+                degHour = hours * 30 - 360;
+            } else if (hours > 0 && hours <= 12){
+                degHour = hours * 30;
+            } else {
+                return console.log("Check your time!");
+            }
+            if (minutes == 0) {
+                degMin = 360;
+            } else if (minutes > 0 && minutes < 60) {
+                degMin = minutes * 6;
+            } else {
+                return console.log("Check your time!");
+            }
+            return `${degHour}:${degMin}`;
+    }
+
+
+11. Написать простую игру «Угадай число». Программа загадывает случайное число от 0 до 100. Игрок должен вводить предположения и получать ответы «Больше», «Меньше» или «Число угадано».
+
+    function run() {
+            let answer = +prompt('Введите загаданое число от 0 до 100');
+            let rand = Math.round(Math.random() * 100);
+            while(true) {
+                if(answer === rand) {
+                    alert("Угадал!");
+                    break;
+                } else if(answer > rand) {
+                    answer = +prompt('Ваше число больше чем введенное, повторите попытку');
+                } else if(answer < rand) {
+                    answer = +prompt('Ваше число меньше чем введенное, повторите попытку');
+                } else {
+                    alert('Что-то пошло не по плану! Досвидания!')
+                    break;
+                }
+            }
+        }
+        run();
