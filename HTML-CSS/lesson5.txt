@@ -1,0 +1,180 @@
+1. Что такое <ol>, <ul> и <li>?
+    Списковые теги, ol - нумерованный, ul - обычный, li - эелемент списка.
+
+2. Сверстать сложную таблицу с объединением строк и столбцов.
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <style>
+            td {
+                width: 200px;
+                height: 100px;
+                border: 1px solid black;
+            }
+        </style>
+    </head>
+    <body>
+        <table>
+            <tr>
+                <td colspan="2"></td>
+                <td rowspan="4"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td rowspan="2"></td>
+            </tr>
+            <tr>
+                <td></td>
+            </tr>
+        </table>
+    </body>
+    </html>
+
+3. В каком регистре лучше писать HTML-код?
+    В нижнем.
+
+4. Как убрать синюю рамку вокруг картинки-ссылки?
+    img {
+        border: none;
+    }
+
+5. Обязательно ли писать alt в <img>?
+    Будет работать и без этого, но писать строго желательно.
+
+6. Что такое html-entities?
+    Ссылки на определенный символы из набора, для вставки в HTML документ, например, &Tab - табуляция.
+
+7. Как убрать подчеркивание для всех ссылок на странице?
+    a {
+        text-decoration: none;
+    }
+
+8. Что делает свойство clear?
+    Устанавливает, с какой стороны элемента запрещено его обтекание другими элементами.
+
+9. Есть ячейка таблицы, в ней 3 дива, в каждом диве – по слову. На первый див применен стиль float: left;
+    на третий – float: right. Что нужно применить на второй див, чтобы все три надписи/дивы были в одной горизонтальной строке,
+    то есть первый имел бы выравнивание по левому краю, третий – по правому, а второй – по центру?
+
+    Что бы он распологался между двумя эелементами можно добавить display: inline-block.
+
+10. Перечислить по пять знакомых вам псевдоклассов и псевдостилей с указанием их функционала.
+
+    :active - срабатывает при активации эелемента
+    :focus - срабатывает когда элемент получает фокус
+    :hover - срабатывает при наведении
+    :checked - выбранные эелменты radio, option, checkbox
+    :first-child - элемент находящийся первым в своем родителе
+
+    я так понимаю под псевдостилями подразумеваются псевдо-эелементы
+    ::after - создаёт псевдоэлемент, который является последним потомком выбранного элемента
+    ::before - создаёт псевдоэлемент,который является первым потомком выбранного элемента
+    ::first-letter - применяет стили к первой букве первой строки блочного элемента, но только если нету другого предшествующего содержимого (такого как изображения или инлайн таблицы).
+    ::first-line - применяет стили к первой строке блочного элемента
+    ::selection - позволяет применить стили к части документа, который был выделен пользователем
+
+11. Нарисовать при помощи CSS3 дом на фоне неба и плывущие облака.
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>HomeCloudsPage</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <style>
+        .sky{
+            display: flex;
+            background-color: deepskyblue;
+            color: white;
+            height: 700px;
+        }
+        .cloud{
+            position: absolute;
+            z-index: 10;
+
+        }
+
+        .one {
+            top: -30px;
+            animation: cloud-fly 30s infinite cubic-bezier(0.25, 0.1, 0.25, 1.0);
+
+        }
+        .two {
+            top: 80px;
+            animation: cloud-fly 18s infinite cubic-bezier(0.25, 0.1, 0.25, 1.0);
+        }
+        .three {
+            top: 120px;
+            animation: cloud-fly 15s infinite linear;
+        }
+        .four {
+            top: 200px;
+            animation: cloud-fly 12s infinite cubic-bezier(0.42, 0, 1.0, 1.0);
+            transition-delay: 1s
+        }
+        .five {
+            top: 280px;
+            animation: cloud-fly 9s infinite cubic-bezier(0.42, 0, 0.58, 1.0);
+
+        }
+        @keyframes cloud-fly {   /* назовём анимацию: "go-left-right" */
+            from {
+                left: -20%;               /* от: left: 0px */
+            }
+            to {
+                left: 110%; /* до: left: 100%-50px */
+            }
+        }
+        .ground{
+            background-color: #9c620f;
+            height: 500px;
+        }
+        .home{
+            position: absolute;
+            left: 230px;
+            top: 300px;
+            border: 3px solid #474747;
+            background-color: #585858;
+            height: 550px;
+            width: 300px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .window{
+            width: 50px;
+            height: 50px;
+            background-color: lightskyblue;
+            border: 2px solid #b15618;
+            margin: 25px 40px;
+        }
+    </style>
+    <body>
+        <header class="sky">
+            <div class="cloud one"><img src="5a2faecaaeece6.7728263015130743787165.png" alt=""></div>
+            <div class="cloud two"><img src="5a2faecaaeece6.7728263015130743787165.png" alt=""></div>
+            <div class="cloud three"><img src="5a2faecaaeece6.7728263015130743787165.png" alt=""></div>
+            <div class="cloud four"><img src="5a2faecaaeece6.7728263015130743787165.png" alt=""></div>
+            <div class="cloud five"><img src="5a2faecaaeece6.7728263015130743787165.png" alt=""></div>
+        </header>
+        <main class="ground">
+            <div class="home">
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+                <div class="window"></div>
+
+            </div>
+        </main>
+    </body>
+    </html>
